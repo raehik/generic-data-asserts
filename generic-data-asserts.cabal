@@ -8,7 +8,7 @@ name:           generic-data-asserts
 version:        0.1.1
 synopsis:       Structural assertions on generic data representations.
 description:    Please see README.md.
-category:       Data, Serialization
+category:       Data, Generics
 homepage:       https://github.com/raehik/generic-rep-asserts#readme
 bug-reports:    https://github.com/raehik/generic-rep-asserts/issues
 author:         Ben Orchard
