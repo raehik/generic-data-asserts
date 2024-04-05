@@ -27,6 +27,7 @@ source-repository head
 library
   exposed-modules:
       Generic.Data.Rep.Assert
+      Generic.Data.Rep.Error
   other-modules:
       Paths_generic_data_asserts
   hs-source-dirs:

@@ -5,22 +5,14 @@
 module Generic.Data.Rep.Assert where
 
 import GHC.Generics
-import GHC.TypeError
-import GHC.TypeLits ( type Symbol )
-
--- polymorphic kind keeps us extra useful -- we only use as 'Constraint', but
--- library users may want to use this in type families
-type GAssertError :: ka -> Symbol -> k
-type GAssertError a msg = TypeError
-         ('Text "Assertion on generic representation failed for type: "
-    :<>: 'ShowType a
-    :$$: 'Text "Message: " :<>: 'Text msg)
+import Generic.Data.Rep.Error
+import GHC.TypeError ( Assert )
 
 type family StripD1 a where StripD1 (D1 _ a) = a
 
 -- | Type is not void i.e. has at least one constructor.
-type GAssertNotVoid a = Assert (IsNotVoid (StripD1 (Rep a)))
-    (GAssertError a "not non-void type (>=1 constructor)")
+type GAssertNotVoid a =
+    Assert (IsNotVoid (StripD1 (Rep a))) (GAssertErrorVoid a)
 type family IsNotVoid a where
     IsNotVoid V1  = False
     IsNotVoid _ = True
@@ -28,8 +20,8 @@ type family IsNotVoid a where
 -- | Type is not a sum type i.e. has at most one constructor.
 --
 -- Permits void types.
-type GAssertNotSum a = Assert (IsNotSum (StripD1 (Rep a)))
-    (GAssertError a "not non-sum type (1 constructor)")
+type GAssertNotSum a =
+    Assert (IsNotSum (StripD1 (Rep a))) (GAssertErrorSum a)
 type family IsNotSum a where
     IsNotSum (_ :+: _) = False
     IsNotSum _ = True
@@ -37,8 +29,8 @@ type family IsNotSum a where
 -- | Type is a sum type i.e. has >=2 constructors.
 --
 -- Permits void types.
-type GAssertSum a = Assert (IsSum (StripD1 (Rep a)))
-    (GAssertError a "not sum type (>=2 constructors)")
+type GAssertSum a =
+    Assert (IsSum (StripD1 (Rep a))) (GAssertErrorNotSum a)
 type family IsSum a where
     IsSum (C1 _ _) = False
     IsSum _ = True
@@ -46,8 +38,8 @@ type family IsSum a where
 -- | Type has only empty constructors.
 --
 -- Permits void types.
-type GAssertEnum a = Assert (IsEnum (StripD1 (Rep a)))
-    (GAssertError a "not enum type (all empty constructors)")
+type GAssertEnum a =
+    Assert (IsEnum (StripD1 (Rep a))) (GAssertErrorNotEnum a)
 type family IsEnum a where
     IsEnum V1 = True
     IsEnum (C1 _ a) = ConsIsEmpty a
