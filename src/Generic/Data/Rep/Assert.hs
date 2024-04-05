@@ -7,9 +7,10 @@ module Generic.Data.Rep.Assert where
 import GHC.Generics
 import GHC.TypeError
 import GHC.TypeLits ( type Symbol )
-import Data.Kind ( type Constraint )
 
-type GAssertError :: k -> Symbol -> Constraint
+-- polymorphic kind keeps us extra useful -- we only use as 'Constraint', but
+-- library users may want to use this in type families
+type GAssertError :: ka -> Symbol -> k
 type GAssertError a msg = TypeError
          ('Text "Assertion on generic representation failed for type: "
     :<>: 'ShowType a
