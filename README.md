@@ -1,7 +1,7 @@
 [gdf-hackage]: https://hackage.haskell.org/package/generic-data-functions
 
-# generic-data-asserts
-Structural assertions on the generic data representations (`GHC.Generic.Rep a`).
+# generic-type-asserts
+Structural assertions on generic type representations (`GHC.Generic.Rep a`).
 
 Sometimes, we want to write generics that only work on certain data types with a
 certain shape e.g. non-sum types (single constructor). Achieving this is fairly
