@@ -1,15 +1,15 @@
-name: generic-data-asserts
-version: 0.2.0
-synopsis: Structural assertions on generic data representations.
+name: generic-type-asserts
+version: 0.3.0
+synopsis: Structural assertions on generic type representations.
 description: Please see README.md.
 extra-source-files:
 - README.md
 - CHANGELOG.md
-category: Data, Generics
+category: Data, Generics, Type
 license: MIT
 license-file: LICENSE
 
-github: raehik/generic-rep-asserts
+github: raehik/generic-type-asserts
 maintainer: Ben Orchard <thefirstmuffinman@gmail.com>
 author: Ben Orchard
 
@@ -61,5 +61,5 @@ tests:
     source-dirs: test
     main: Main.hs
     dependencies:
-    - generic-data-asserts
+    - generic-type-asserts
     - type-spec ^>= 0.4.0.0

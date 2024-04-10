@@ -14,7 +14,7 @@
   let
     # simple devshell for non-dev compilers: really just want `cabal repl`
     nondevDevShell = compiler: {
-      mkShellArgs.name = "${compiler}-generic-data-asserts";
+      mkShellArgs.name = "${compiler}-generic-type-asserts";
       hoogle = false;
       tools = _: {
         hlint = null;
@@ -27,7 +27,7 @@
       systems = inputs.nixpkgs.lib.systems.flakeExposed;
       imports = [ inputs.haskell-flake.flakeModule ];
       perSystem = { self', pkgs, config, ... }: {
-        packages.default  = self'.packages.ghc96-generic-data-asserts;
+        packages.default  = self'.packages.ghc96-generic-type-asserts;
         devShells.default = self'.devShells.ghc96;
         haskellProjects.ghc98 = {
           basePackages = pkgs.haskell.packages.ghc98;
@@ -35,7 +35,7 @@
         };
         haskellProjects.ghc96 = {
           basePackages = pkgs.haskell.packages.ghc96;
-          devShell.mkShellArgs.name = "ghc96-generic-data-asserts";
+          devShell.mkShellArgs.name = "ghc96-generic-type-asserts";
         };
         haskellProjects.ghc94 = {
           basePackages = pkgs.haskell.packages.ghc94;

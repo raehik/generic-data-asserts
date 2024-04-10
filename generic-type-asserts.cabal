@@ -4,13 +4,13 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 
-name:           generic-data-asserts
-version:        0.2.0
-synopsis:       Structural assertions on generic data representations.
+name:           generic-type-asserts
+version:        0.3.0
+synopsis:       Structural assertions on generic type representations.
 description:    Please see README.md.
-category:       Data, Generics
-homepage:       https://github.com/raehik/generic-rep-asserts#readme
-bug-reports:    https://github.com/raehik/generic-rep-asserts/issues
+category:       Data, Generics, Type
+homepage:       https://github.com/raehik/generic-type-asserts#readme
+bug-reports:    https://github.com/raehik/generic-type-asserts/issues
 author:         Ben Orchard
 maintainer:     Ben Orchard <thefirstmuffinman@gmail.com>
 license:        MIT
@@ -22,14 +22,14 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/raehik/generic-rep-asserts
+  location: https://github.com/raehik/generic-type-asserts
 
 library
   exposed-modules:
-      Generic.Data.Rep.Assert
-      Generic.Data.Rep.Error
+      Generic.Type.Assert
+      Generic.Type.Assert.Error
   other-modules:
-      Paths_generic_data_asserts
+      Paths_generic_type_asserts
   hs-source-dirs:
       src
   default-extensions:
@@ -52,7 +52,7 @@ test-suite spec
   type: exitcode-stdio-1.0
   main-is: Main.hs
   other-modules:
-      Paths_generic_data_asserts
+      Paths_generic_type_asserts
   hs-source-dirs:
       test
   default-extensions:
@@ -69,6 +69,6 @@ test-suite spec
   ghc-options: -Wall
   build-depends:
       base >=4.14 && <5
-    , generic-data-asserts
+    , generic-type-asserts
     , type-spec >=0.4.0.0 && <0.5
   default-language: GHC2021

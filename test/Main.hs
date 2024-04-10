@@ -2,7 +2,7 @@ module Main where
 
 import Test.TypeSpec
 import GHC.Generics
-import Generic.Data.Rep.Assert
+import Generic.Type.Assert
 import Data.Kind
 
 data DSum = DSum1 () | DSum2 deriving stock Generic

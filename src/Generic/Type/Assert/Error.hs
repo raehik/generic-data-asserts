@@ -4,7 +4,7 @@
 -- we're unable to perform asserts which evaluate to 'Constraint's e.g. type
 -- families, so we expose them neatly here.
 
-module Generic.Data.Rep.Error where
+module Generic.Type.Assert.Error where
 
 import GHC.TypeError
 import GHC.TypeLits ( type Symbol )

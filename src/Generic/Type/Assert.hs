@@ -1,14 +1,16 @@
 {-# LANGUAGE UndecidableInstances #-} -- for IsEnum
 
--- | Structural assertions on generic data representation.
+-- | Structural assertions on generic type representation.
 
-module Generic.Data.Rep.Assert where
+module Generic.Type.Assert
+  ( type GAssertNotVoid
+  , type GAssertNotSum, type GAssertSum
+  , type GAssertEnum
+  ) where
 
 import GHC.Generics
-import Generic.Data.Rep.Error
+import Generic.Type.Assert.Error
 import GHC.TypeError ( Assert )
-
-type family StripD1 a where StripD1 (D1 _ a) = a
 
 -- | Type is not void i.e. has at least one constructor.
 type GAssertNotVoid a =
@@ -44,6 +46,10 @@ type family IsEnum a where
     IsEnum V1 = True
     IsEnum (C1 _ a) = ConsIsEmpty a
     IsEnum (l :+: r) = IsEnum l `And` IsEnum r
+
+--------------------------------------------------------------------------------
+
+type family StripD1 a where StripD1 (D1 _ a) = a
 
 type family ConsIsEmpty a where
     ConsIsEmpty U1 = True
