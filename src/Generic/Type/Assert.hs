@@ -11,6 +11,7 @@ module Generic.Type.Assert
 import GHC.Generics
 import Generic.Type.Assert.Error
 import GHC.TypeError ( Assert )
+import Data.Type.Bool ( type (&&) )
 
 -- | Type is not void i.e. has at least one constructor.
 type GAssertNotVoid a =
@@ -45,7 +46,7 @@ type GAssertEnum a =
 type family IsEnum a where
     IsEnum V1 = True
     IsEnum (C1 _ a) = ConsIsEmpty a
-    IsEnum (l :+: r) = IsEnum l `And` IsEnum r
+    IsEnum (l :+: r) = IsEnum l && IsEnum r
 
 --------------------------------------------------------------------------------
 
@@ -54,8 +55,3 @@ type family StripD1 a where StripD1 (D1 _ a) = a
 type family ConsIsEmpty a where
     ConsIsEmpty U1 = True
     ConsIsEmpty _  = False
-
--- | Type level boolean AND.
-type family And l r where
-    And True True = True
-    And _    _    = False
